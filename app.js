@@ -30,10 +30,11 @@ app.post('/checkAuth', (req, res) => {
   if (req.body.password == "admin") {
     // Establecemos que el usuario conoce la palabra secreta mediante una cookie, y lo indetificamos como amdin. Obviamente, esto tendria que estar encriptado para mayor seguridad, o usando paquete de terceros para hacer una autentificación más profesional. maxAge nos dice que está cookie pasará a ser inválida al cabo de 60000 milisegundos = 60 minutos = 1 hora
     res.cookie("user", "admin", { maxAge: 600000 })
-    res.redirect('/')
+    return res.redirect('/')
   }
 
-  res.status(500).send("Password incorrecto");
+  // Código HTTP para informar que el usuario no está autorizado
+  res.status(401).send("Password incorrecto");
 
 })
 
