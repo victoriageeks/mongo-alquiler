@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+</head>
+
+<body>
+    <main class="container">
+        <article class="grid">
+            <div>
+                <hgroup>
+                    <h1>Ruta protegida</h1>
+                </hgroup>
+                <form method="post" action="/checkAuth">
+
+                    <input type="password" name="password" placeholder="Password" aria-label="Password" required>
+
+                    <input type="submit" class="contrast" value="Acceder">
+                </form>
+            </div>
+            <div></div>
+        </article>
+    </main><!-- ./ Main -->
+</body>
+
+</html>
