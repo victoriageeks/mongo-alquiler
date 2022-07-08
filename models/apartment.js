@@ -1,7 +1,7 @@
 
 // MongoDB driver para acceder a la base de datos
 // PROHIBIDO COPIAR MI URI
-const uri = "mongodb+srv://root:root@cluster0.lo8dg.mongodb.net/?retryWrites=true&w=majority";
+const uri = "PON-TU-URI-AQUI";
 const { MongoClient } = require('mongodb');
 const client = new MongoClient(uri, {
     useNewUrlParser: true,
