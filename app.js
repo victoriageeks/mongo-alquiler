@@ -6,8 +6,6 @@ var logger = require('morgan');
 
 var apartmentsRouter = require('./routes/apartments');
 
-
-
 var app = express();
 
 // view engine setup
@@ -22,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', apartmentsRouter);
 
+// Renderizar el formulario de login
 app.get('/login', (req, res) => {
   res.render('login');
 })

@@ -4,9 +4,10 @@ var adminApartmentsController = require('../controllers/apartment');
 var router = express.Router();
 
 router.get("/", (req, res) => {
-    res.send("Mostrar todos los apartamentos")
+    res.send("Mostrar todos los apartamentos. SE necesita implementar el controlador!")
 });
 
+// Esta función se encarga de permitir, o no, el paso de la petición del cliente en función de si esta autentificado o no
 const checkAuth = (req, res, next) => {
     console.log(req.cookies);
     if (req.cookies.user == "admin") {
