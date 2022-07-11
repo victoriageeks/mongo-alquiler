@@ -14,12 +14,7 @@ const checkAuth = (req, res, next) => {
 
 }
 
-router.get("/", (req, res) => {
-    res.send("Mostrar todos los apartamentos. SE necesita implementar el controlador!");
-    res.render('index.ejs', {
-        user: res.cookie.user
-    })
-});
+router.get("/", apartmentsController.getAllApartments);
 
 
 /* Ruta que muestra el formulario para añadir un nuevo apartmento */
