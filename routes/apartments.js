@@ -19,8 +19,11 @@ router.get("/", apartmentsController.getAllApartments);
 
 /* Ruta que muestra el formulario para añadir un nuevo apartmento */
 /* La función checkAuth se va a encargar de comprobar si el usuario esta autentificado como administrador para poder acceder al controlador, y se debe colocar en cada una de las rutas que requieran autentificación */
-router.get('/apartment/new-apartment', checkAuth, apartmentsController.getAddApartment);
-router.post('/apartment/new-apartment', checkAuth, apartmentsController.postAddApartment);
-router.get('/apartment/:id/edit', checkAuth, apartmentsController.getEditApartment);
+router.get('/new-apartment', checkAuth, apartmentsController.getAddApartment);
+router.post('/new-apartment', checkAuth, apartmentsController.postAddApartment);
+router.get('/:id/edit', checkAuth, apartmentsController.getEditApartment);
+
+// ruta detalle del apartamento
+router.get('/:id', apartmentsController.getApartmentDetail)
 
 module.exports = router;

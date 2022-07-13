@@ -18,7 +18,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', apartmentsRouter);
+app.use('/apartment', apartmentsRouter);
+
+app.get('/', (req, res) => {
+  res.redirect('/apartment');
+})
 
 // Renderizar el formulario de login
 app.get('/login', (req, res) => {
@@ -28,8 +32,8 @@ app.get('/login', (req, res) => {
 app.post('/checkAuth', (req, res) => {
   // Miramos si el usuario ha puesto "la palabra secrecta"
   if (req.body.password == "admin") {
-    // Establecemos que el usuario conoce la palabra secreta mediante una cookie, y lo indetificamos como amdin. Obviamente, esto tendria que estar encriptado para mayor seguridad, o usando paquete de terceros para hacer una autentificación más profesional. maxAge nos dice que está cookie pasará a ser inválida al cabo de 60000 milisegundos = 60 minutos = 1 hora
-    res.cookie("user", "admin", { maxAge: 600000 })
+    // Establecemos que el usuario conoce la palabra secreta mediante una cookie, y lo indetificamos como amdin. Obviamente, esto tendria que estar encriptado para mayor seguridad, o usando paquete de terceros para hacer una autentificación más profesional. maxAge nos dice que está cookie pasará a ser inválida al cabo 1 hora
+    res.cookie("user", "admin", { maxAge: 3600000 })
     return res.redirect('/')
   }
 

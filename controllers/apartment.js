@@ -48,9 +48,21 @@ const getEditApartment = async (req, res) => {
     // })
 }
 
+const getApartmentDetail = async (req, res) => {
+    // 1. Consultar al Modelo el apartamento identificado por el id que nos pasa en la petición GET. req.params.id
+    const { id } = req.params; // const id = req.params.id;
+    const document = await Apartment.findById(id);
+
+    // 2. Renderizar la vista con el documento recuperado
+    res.render('apartment', {
+        document
+    });
+}
+
 module.exports = {
     getAddApartment,
     getAllApartments,
     postAddApartment,
-    getEditApartment
+    getEditApartment,
+    getApartmentDetail
 }
