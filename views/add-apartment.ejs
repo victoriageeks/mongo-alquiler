@@ -10,35 +10,44 @@
 </head>
 
 <body>
-    <h1>Añadir Apartamento</h1>
-    <form method="post">
+    <!-- Si el objeto tiene un campo _id, será que estamos renderizando la vista desde el controlador getEditApartment -->
+    <% if (document._id) { %>
+        <h1>Editar Apartamento</h1>
+        <% } else { %>
+            <h1>Agregar Apartamento</h1>
+            <% } %>
 
-        <label for="title">
-            Nombre del apartamento
-            <input type="text" id="title" name="title" placeholder="Casa Gogo" maxlength="30" required>
-        </label>
+                <form method="post">
 
-        <label for="price">
-            Precio por noche (€)
-            <input type="number" id="price" name="price" placeholder="30 €" min="1" max="500000" required>
-        </label>
+                    <label for="title">
+                        Nombre del apartamento
+                        <input type="text" id="title" name="title" placeholder="Casa Gogo" maxlength="30"
+                            value="<%= document.title %>" required>
+                    </label>
 
-        <label for="meters">
-            Metros cuadrados ( &#13217; )
-            <input type="number" id="meters" name="meters" placeholder="200 ( &#13217; )" min="10" max="10000" required>
-        </label>
+                    <label for="price">
+                        Precio por noche (€)
+                        <input type="number" id="price" name="price" placeholder="30 €" min="1" max="500000"
+                            value="<%= document.price %>" required>
+                    </label>
 
-        <label for="photo">
-            URL Photo
-            <input type="url" id="photo" name="photo"
-                placeholder="https://i.picsum.photos/id/352/200/200.jpg?hmac=HPgFQ0Sto_7261sbYIaRW0-z2Jq0-C92RSt0vkdC6Uc"
-                required>
-        </label>
+                    <label for="meters">
+                        Metros cuadrados ( &#13217; )
+                        <input type="number" id="meters" name="meters" placeholder="200 ( &#13217; )" min="10"
+                            max="10000" value="<%= document.meters %>" required>
+                    </label>
 
-        <!-- Button -->
-        <button type="submit">Submit</button>
+                    <label for="photo">
+                        URL Photo
+                        <input type="url" id="photo" name="photo"
+                            placeholder="https://i.picsum.photos/id/352/200/200.jpg?hmac=HPgFQ0Sto_7261sbYIaRW0-z2Jq0-C92RSt0vkdC6Uc"
+                            value="<%= document.photo %>" required>
+                    </label>
 
-    </form>
+                    <!-- Button -->
+                    <button type="submit">Submit</button>
+
+                </form>
 </body>
 
 </html>
