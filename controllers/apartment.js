@@ -59,10 +59,28 @@ const getApartmentDetail = async (req, res) => {
     });
 }
 
+const getFilteredApartments = async (req, res) => {
+    // 1. Recuperar los filtros de la petición GET
+    const { price } = req.query;
+
+    // 2. Ir al modelo y filtrar los apartamentos que coincidan con los filtros
+    const apartments = await Apartment.find({
+        price: {
+            $lte: price // "less than equal", el precio se encuentra en el rango de 0 a price
+        }
+    });
+
+    // 3. Renderizar la vista con los apartamentos filtrados
+    res.render('index', {
+        apartments
+    });
+}
+
 module.exports = {
     getAddApartment,
     getAllApartments,
     postAddApartment,
     getEditApartment,
-    getApartmentDetail
+    getApartmentDetail,
+    getFilteredApartments
 }

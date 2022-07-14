@@ -7,25 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <h1>Lista de apartamentos</h1>
-    <% apartments.forEach(d=> { %>
-        <a href="/apartment/<%= d._id %>">
-            <article>
-                <header>
-                    <%= d.title %>
-                </header>
-                <img style="width:200px" src="<%= d.photo %>" alt="">
-                <p>Superficie: <%= d.meters %>2</p>
-                <footer>
-                    <%= d.price %> / por noche
-                </footer>
-            </article>
-        </a>
-        <% }); %>
+    <section class="container">
+        <form method="get" action="/apartment/search">
 
+            <!-- Markup example 1: input is inside label -->
+            <label for="price">
+                Precio por noche
+                <input type="number" id="price" name="price" placeholder="30">
+            </label>
+
+
+
+            <!-- Button -->
+            <button type="submit">Submit</button>
+
+        </form>
+    </section>
+
+    <section class="container">
+        <h1 id="lista-apartamentos">Lista de apartamentos</h1>
+        <% apartments.forEach(d=> { %>
+            <a href="/apartment/<%= d._id %>">
+                <article>
+                    <header>
+                        <%= d.title %>
+                    </header>
+                    <img style="width:200px" src="<%= d.photo %>" alt="">
+                    <p>Superficie: <%= d.meters %> m<sup>2</sup></p>
+                    <footer>
+                        <%= d.price %> / por noche
+                    </footer>
+                </article>
+            </a>
+            <% }); %>
+    </section>
 </body>
 
 </html>

@@ -15,7 +15,7 @@ const checkAuth = (req, res, next) => {
 }
 
 router.get("/", apartmentsController.getAllApartments);
-
+router.get("/search", apartmentsController.getFilteredApartments);
 
 /* Ruta que muestra el formulario para añadir un nuevo apartmento */
 /* La función checkAuth se va a encargar de comprobar si el usuario esta autentificado como administrador para poder acceder al controlador, y se debe colocar en cada una de las rutas que requieran autentificación */
