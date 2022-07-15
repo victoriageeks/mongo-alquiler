@@ -25,6 +25,8 @@ router.post('/new-apartment', checkAuth, apartmentsController.postAddApartment);
 router.get('/:id/edit', checkAuth, apartmentsController.getEditApartment);
 router.post('/:id/edit', checkAuth, apartmentsController.postEditApartment);
 
+router.post('/:id/book', apartmentsController.postBookApartment);
+
 // ruta detalle del apartamento
 router.get('/:id', apartmentsController.getApartmentDetail)
 

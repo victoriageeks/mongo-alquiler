@@ -95,6 +95,16 @@ const postEditApartment = async (req, res) => {
     res.redirect(`/apartment/${id}`);
 }
 
+const postBookApartment = async (req, res) => {
+
+    // TODO
+
+    // 1. Actualizar el apartamento y añadirle la nueva reserva. Tiene que suceder que a medida que añado reservas, el campo booking va 'creciendo', con nuevas reservas
+
+    // 2. Además, mirar si las fechas seleccionadas por el usuario estan libres para este apartmento. En tal caso, devolver un mensaje de error.
+    res.send(`Apartamento ${req.params.id} reservado.`);
+}
+
 module.exports = {
     getAddApartment,
     getAllApartments,
@@ -102,5 +112,6 @@ module.exports = {
     getEditApartment,
     getApartmentDetail,
     getFilteredApartments,
-    postEditApartment
+    postEditApartment,
+    postBookApartment
 }

@@ -16,6 +16,18 @@
     </h2>
     <p>Precio por noche: <%= document.price %>
     </p>
+    <h2>Reservar</h2>
+    <!-- /apartment/:id/book -->
+    <form method="POST" action="/apartment/<%= document._id %>/book">
+        <label for="arrivalDate">Fecha de llegada</label>
+        <input type="date" name="arrivalDate" id="arrivalDate" required>
+
+        <label for="departureDate">Fecha de salida</label>
+        <input type="date" name="departureDate" id="departureDate" required>
+
+
+        <input type="submit" class="contrast" value="Reservar">
+    </form>
 </body>
 
 </html>
