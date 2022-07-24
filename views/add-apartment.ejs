@@ -1,53 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <% if (document._id) { %>
+        <title>Edit apartment</title>
+    <% } else{ %>
+        <title>New apartment</title>
+        <% }; %>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
+</style>
 </head>
 
-<body>
-    <!-- Si el objeto tiene un campo _id, será que estamos renderizando la vista desde el controlador getEditApartment -->
-    <% if (document._id) { %>
-        <h1>Editar Apartamento</h1>
-        <% } else { %>
-            <h1>Agregar Apartamento</h1>
-            <% } %>
 
-                <form method="post">
+<body class="w3-light-grey">
+<!-- Navigation Bar -->
+<div class="w3-bar w3-white w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-brown w3-mobile"><i class="fa fa-bed w3-margin-right"></i>Home</a>
+    <a href="#rooms" class="w3-bar-item w3-button w3-mobile">Rooms</a>
+    <a href="#about" class="w3-bar-item w3-button w3-mobile">About</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-mobile">Contact</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-right w3-light-grey w3-mobile">Book Now</a>
+</div>
+<!---->
 
-                    <label for="title">
-                        Nombre del apartamento
-                        <input type="text" id="title" name="title" placeholder="Casa Gogo" maxlength="30"
-                            value="<%= document.title %>" required>
-                    </label>
+<div class="d-flex justify-content-center flex-wrap">
+    <div class="w-50 p-3">
+        <% if (document._id) { %>
+            <h1>Edit apartment</h1>
+        <% } else{ %>
+            <h1>New apartment</h1>
+            <% }; %>
+        <!--FORM--------------->
+        <form class="row g-3 d-flex" method="post">
+            <!--Apartment title-->
+            <div class="col-md-6">
+                <label for="title" class="form-label">Apartment title(*)</label>
+                <input type="text" class="form-control" id="title" name="title" value="<%= document.title %>" placeholder="Aesthetic apartment" required>
+            </div>
+            <!------------------->
+            
+            <!--Apartment description-->
+            <div class="col-12">
+                <label for="description" class="form-label">Apartment description(*)</label>
+                <textarea class="form-control" id="description" name="description" rows="3" value="<%= document.description %>" placeholder="Cute aesthetic apartment to relax with chill vibes." required></textarea>
+            </div>
+            <!------------------------->
 
-                    <label for="price">
-                        Precio por noche (€)
-                        <input type="number" id="price" name="price" placeholder="30 €" min="1" max="500000"
-                            value="<%= document.price %>" required>
-                    </label>
+            <!--Apartment rules!-->
+            <fieldset class="row mb-3 pt-3">
+                <legend class="col-form-label col-sm-2 pt-0">Allowed:</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="smoke" name="smoke" value="<%= document.smoke %>">
+                        <label class="form-check-label" for="smoke">
+                        Smoke
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="party" name="party" value="<%= document.party %>">
+                        <label class="form-check-label" for="party">
+                        Party
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="pet" name="pet" value="<%= document.pet %>">
+                        <label class="form-check-label" for="pet">
+                        Pet
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <!-------------------->
 
-                    <label for="meters">
-                        Metros cuadrados ( &#13217; )
-                        <input type="number" id="meters" name="meters" placeholder="200 ( &#13217; )" min="10"
-                            max="10000" value="<%= document.meters %>" required>
-                    </label>
+            <!--bedrooms,beds & toilets-->
+            <div class="col-4">
+                <label for="bedrooms" class="form-label">Number rooms(*)</label>
+                <input type="number" class="form-control" id="bedrooms" name="bedrooms" placeholder="1" required min="1" max="5" value="<%= document.bedrooms %>" title="Max 5 rooms.">
+            </div>
 
-                    <label for="photo">
-                        URL Photo
-                        <input type="url" id="photo" name="photo"
-                            placeholder="https://i.picsum.photos/id/352/200/200.jpg?hmac=HPgFQ0Sto_7261sbYIaRW0-z2Jq0-C92RSt0vkdC6Uc"
-                            value="<%= document.photo %>" required>
-                    </label>
+            <div class="col-4">
+                <label for="beds" class="form-label">Number beds(*)</label>
+                <select id="beds" name="beds" class="form-select" value="<%= document.beds %>" required>
+                <option selected>choose..</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                </select>
+            </div>
 
-                    <!-- Button -->
-                    <button type="submit">Submit</button>
+            <div class="col-4">
+                <label for="toilets" class="form-label">Number toilets(*)</label>
+                <input type="number" class="form-control" id="toilets" name="toilets" placeholder="1" required min="1" max="3" value="<%= document.toilets %>" title="Max 3 toilets.">
+            </div>
+            <!---->
 
-                </form>
+            <!--Apartment photos-->
+            <div class="row g-3">
+                <div class="col">
+                    <label for="main_url" class="form-label">Main photo(*)</label>
+                    <input type="url" class="form-control" placeholder="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" name="main_url" value="<%= document.main_url %>" required>
+                </div>
+                <div class="col">
+                    <label for="description_p1" class="form-label">Photo description(*)</label>
+                    <input type="text" class="form-control" name="description_p1" placeholder="Main room"
+                    value="<%= document.description_p1 %>" required>
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label for="url2" class="form-label">Photo 2</label>
+                    <input type="url" class="form-control" placeholder="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" name="url2" value="<%= document.url2 %>">
+                </div>
+                <div class="col">
+                    <label for="description_p2" class="form-label">Photo description</label>
+                    <input type="text" class="form-control" placeholder="Kitchen" name="description_p2" value="<%= document.description_p2 %>">
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label for="url3" class="form-label">Photo 3</label>
+                    <input type="url" class="form-control" placeholder="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" name="url3" value="<%= document.url3 %>">
+                </div>
+                <div class="col">
+                    <label for="description_p3" class="form-label">Photo description</label>
+                    <input type="text" class="form-control" placeholder="Bed" name="description_p3" value="<%= document.description_p3 %>">
+                </div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col">
+                    <label for="url4" class="form-label">Photo 4</label>
+                    <input type="url" class="form-control" placeholder="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" name="url4" value="<%= document.url4 %>">
+                </div>
+                <div class="col">
+                    <label for="description_p4" class="form-label">Photo description</label>
+                    <input type="text" class="form-control" placeholder="Toilet" name="descripton_p4"
+                    value="<%= document.description_p4 %>">
+                </div>
+            </div>
+            <!----------------->
+            
+            <!--price, guests, meters-->
+            <div class="col-md-4">
+                <label for="price" class="form-label">Price in €(*)</label>
+                <input type="number" class="form-control" id="price" name="price" placeholder="50" required min="50" max="375" value="<%= document.price %>">
+            </div>
+
+            <div class="col-4">
+                <label for="guests" class="form-label">Guests(*)</label>
+                <input type="number" class="form-control" id="guests" name="guests" placeholder="1" required min="1" max="12" value="<%= document.guests %>" title="Max 12 guests.">
+            </div>
+
+            <div class="col-md-4">
+                <label for="meters" class="form-label">Apartment in m<sup>2</sup>(*)</label>
+                <input type="number" class="form-control" id="meters" name="meters" placeholder="35" required min="35" max="240" value="<%= document.meters %>">
+            </div>
+            <!-------------------->
+            
+            <!--Apartment services-->
+            <fieldset class="row mb-3 pt-3">
+                <legend class="col-form-label col-sm-2 pt-0">Apartment services:</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="air_conditioning" name="air_conditioning" value="<%= document.air_conditioning %>">
+                        <label class="form-check-label" for="air_conditioning">
+                        Air conditioning
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="heating" name="heating" value="<%= document.heating %>">
+                        <label class="form-check-label" for="heating">
+                        Heating
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="reduced_mobility_adapted" name="reduced_mobility_adapted" value="<%= document.reduced_mobility_adapted %>">
+                        <label class="form-check-label" for="reduced_mobility_adapted">
+                        Reduced mobility adapted
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="tv" name="tv" value="<%= document.tv %>">
+                        <label class="form-check-label" for="tv">
+                        Tv
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="kitchen" name="kitchen" value="<%= document.kitchen %>">
+                        <label class="form-check-label" for="kitchen">
+                        Kitchen
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="internet" name="internet" value="<%= document.internet %>">
+                        <label class="form-check-label" for="internet">
+                        Internet
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <!---------------------->
+
+            <!--Apartment location-->
+            <div class="col-md-4">
+                <label for="province" class="form-label">Province(*)</label>
+                <input type="text" class="form-control" id="province" name="province" value="<%= document.province %>" placeholder="Barcelona" required>
+            </div>
+            <div class="col-md-4">
+                <label for="city" class="form-label">City(*)</label>
+                <input type="text" class="form-control" id="city" name="city" value="<%= document.city %>" placeholder="Barcelona" required>
+            </div>
+            <div class="col-md-4">
+                <label for="coordenates" class="form-label">Coordenates(*)</label>
+                <input type="text" class="form-control" id="coordenates" name="coordenates" value="<%= document.coordinates %>" placeholder="41°22'57″N 2°10'37″E" required>
+            </div>
+            <!---------------------->
+
+            <!--SUBMIT BTN-->
+            <div class="col-12 d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Upload new apartment</button>
+            </div>
+            <!-------------->
+            </div>
+            
+        </form>
+    </div>
+</div>
+
 </body>
-
 </html>

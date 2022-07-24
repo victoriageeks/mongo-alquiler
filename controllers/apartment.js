@@ -20,14 +20,83 @@ const getAllApartments = async (req, res) => {
 
 const postAddApartment = async (req, res) => {
     // 1. Recuperar los campos del formulario
-    const { title, meters, photo, price } = req.body;
+    const {title,
+        description,
+        smoke,
+        party,
+        pet,
+        bedrooms,
+        beds,
+        toilets,
+        main_url,
+        description_p1,
+        url2,
+        description_p2,
+        url3,
+        description_p3,
+        url4,
+        description_p4,
+        price,
+        guests,
+        meters,
+        air_conditioning,
+        heating,
+        reduced_mobility_adapted,
+        tv,
+        kitchen,
+        internet,
+        province,
+        city,
+        coordinates} = req.body;
 
     // 2. Insertar el apartmento en la base de datos
     const apartment = new Apartment({
         title,
+        description,
+        allowed:{
+            smoke,
+            party,
+            pet
+        },
+        rooms:{
+            bedrooms,
+            beds
+        },
+        toilets,
+        album:{
+            main_p:{
+                main_url,
+                description_p1
+            },
+            photo2:{
+                url2,
+                description_p2
+            },
+            photo3:{
+                url3,
+                description_p3
+            },
+            photo4:{
+                url4,
+                description_p4
+            }
+        },
+        price,
+        guests,
         meters,
-        photo,
-        price
+        services:{
+            air_conditioning,
+            heating,
+            reduced_mobility_adapted,
+            tv,
+            kitchen,
+            internet
+        },
+        location:{
+            province,
+            city,
+            coordinates
+        }
     });
 
     // 2.5: Salvamos el documento en la base de datos
@@ -81,14 +150,84 @@ const getFilteredApartments = async (req, res) => {
 const postEditApartment = async (req, res) => {
     // 1. Recuperar los campos del formulario
     const { id } = req.params;
-    const { title, meters, photo, price } = req.body;
+    const {title,
+        description,
+        smoke,
+        party,
+        pet,
+        bedrooms,
+        beds,
+        toilets,
+        main_url,
+        description_p1,
+        url2,
+        description_p2,
+        url3,
+        description_p3,
+        url4,
+        description_p4,
+        price,
+        guests,
+        meters,
+        air_conditioning,
+        heating,
+        reduced_mobility_adapted,
+        tv,
+        kitchen,
+        internet,
+        province,
+        city,
+        coordinates
+        } = req.body;
 
     // 2. Actualizar el apartamento en la base de datos
     await Apartment.findByIdAndUpdate(id, {
         title,
+        description,
+        allowed:{
+            smoke,
+            party,
+            pet
+        },
+        rooms:{
+            bedrooms,
+            beds
+        },
+        toilets,
+        album:{
+            main_p:{
+                main_url,
+                description_p1
+            },
+            photo2:{
+                url2,
+                description_p2
+            },
+            photo3:{
+                url3,
+                description_p3
+            },
+            photo4:{
+                url4,
+                description_p4
+            }
+        },
+        price,
+        guests,
         meters,
-        photo,
-        price
+        services:{
+            air_conditioning,
+            heating,
+            reduced_mobility_adapted,
+            tv,
+            kitchen,
+            internet
+        },
+        location:{
+            province,
+            city,
+            coordinates
+        }
     });
 
     // 3. Redireccionar al apartamento editado

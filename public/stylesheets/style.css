@@ -7,3 +7,8 @@ a {
   color: #00B7FF;
   text-decoration-line: none;
 }
+
+#cardApartment{
+  justify-content: end;
+  width: 100%;
+}

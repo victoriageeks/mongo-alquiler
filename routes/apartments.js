@@ -6,6 +6,7 @@ var router = express.Router();
 
 // Esta función se encarga de permitir, o no, el paso de la petición del cliente en función de si esta autentificado o no
 const checkAuth = (req, res, next) => {
+    //aquí es la contraseña del login, entonces genera una cookie de tipo admin, cuando se logguee correctamente, hace el return next que permite ejecutar la función get add-apartment
     if (req.cookies.user == "admin") {
         return next();
     }
